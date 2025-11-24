@@ -2,6 +2,16 @@
 
 Ledger service для управления балансами мерчантов и переводами между ними с поддержкой множественных валют, идемпотентности и комиссий.
 
+## Демо
+
+Для упрощения проверки проект задеплоен на сервер:
+
+- **Swagger UI**: http://37.1.215.158:8000/docs
+- **ReDoc**: http://37.1.215.158:8000/redoc
+- **API Base URL**: http://37.1.215.158:8000/api/v1
+
+Все примеры запросов ниже используют этот сервер.
+
 ## Технологии
 
 - Python 3.10+
@@ -24,13 +34,13 @@ python scripts/init_database.py
 python main.py
 ```
 
-API доступен на `http://localhost:8000`, документация - `http://localhost:8000/docs`
+Для локального запуска: API доступен на `http://localhost:8000`, документация - `http://localhost:8000/docs`
 
 ## Примеры API запросов
 
 ### Создать мерчанта
 ```bash
-curl -X POST http://localhost:8000/api/v1/merchants \
+curl -X POST http://37.1.215.158:8000/api/v1/merchants \
   -H "Content-Type: application/json" \
   -d '{
     "merchant_name": "alice_store",
@@ -41,12 +51,12 @@ curl -X POST http://localhost:8000/api/v1/merchants \
 
 ### Получить баланс
 ```bash
-curl http://localhost:8000/api/v1/merchants/alice_store/balance?currency=BTC
+curl http://37.1.215.158:8000/api/v1/merchants/alice_store/balance?currency=BTC
 ```
 
 ### Выполнить перевод
 ```bash
-curl -X POST http://localhost:8000/api/v1/transfers \
+curl -X POST http://37.1.215.158:8000/api/v1/transfers \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: unique-key-123" \
   -d '{
@@ -59,7 +69,7 @@ curl -X POST http://localhost:8000/api/v1/transfers \
 
 ### Список переводов
 ```bash
-curl "http://localhost:8000/api/v1/transfers?from=alice_store&currency=BTC"
+curl "http://37.1.215.158:8000/api/v1/transfers?from=alice_store&currency=BTC"
 ```
 
 ## Архитектура
